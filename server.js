@@ -2,6 +2,8 @@ const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 const helmet = require('helmet');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -27,6 +29,12 @@ async function initDatabase() {
     await pool.connect();
     console.log('✅ Connexion à PostgreSQL réussie');
     global.pool = pool;
+
+    // Créer les tables si elles n'existent pas
+    const schemaPath = path.join(__dirname, 'db/schema.sql');
+    const schema = fs.readFileSync(schemaPath, 'utf8');
+    await pool.query(schema);
+    console.log('✅ Tables créées/vérifiées avec succès');
   } catch (error) {
     console.error('❌ Erreur lors de la connexion à PostgreSQL:', error);
     process.exit(1);
