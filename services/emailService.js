@@ -71,7 +71,43 @@ async function sendConfirmationEmail({ name, email }) {
   }
 }
 
+// Fonction pour envoyer une notification de quota API épuisé
+async function sendQuotaNotification({ apiName, errorMessage }) {
+  const mailOptions = {
+    from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
+    subject: `⚠️ ALERT: Quota API épuisé - ${apiName}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #dc2626;">⚠️ Quota API épuisé</h2>
+        <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #dc2626;">
+          <p><strong>API:</strong> ${apiName}</p>
+          <p><strong>Erreur:</strong></p>
+          <p style="background: white; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px;">${errorMessage}</p>
+        </div>
+        <p><strong>Action requise:</strong></p>
+        <ul>
+          <li>Vérifiez votre quota sur le dashboard de l'API</li>
+          <li>Augmentez votre quota ou attendez le reset quotidien</li>
+          <li>Considérez de passer à un plan payant si nécessaire</li>
+        </ul>
+        <p style="color: #6b7280; font-size: 12px;">Notification envoyée depuis le backend de Samaké DELAMOU</p>
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('✅ Notification de quota envoyée');
+    return true;
+  } catch (error) {
+    console.error('❌ Erreur lors de l\'envoi de la notification de quota:', error);
+    return false;
+  }
+}
+
 module.exports = {
   sendContactEmail,
   sendConfirmationEmail,
+  sendQuotaNotification,
 };
