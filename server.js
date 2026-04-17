@@ -45,6 +45,7 @@ initDatabase().then(() => {
   // Routes
   app.use('/api/projects', require('./routes/projects'));
   app.use('/api/messages', require('./routes/messages'));
+  app.use('/api/chatbot', require('./routes/chatbot'));
   app.use('/api/skills', require('./routes/skills'));
 
   // Route racine
@@ -55,7 +56,8 @@ initDatabase().then(() => {
       endpoints: {
         projects: '/api/projects',
         messages: '/api/messages',
-        skills: '/api/skills'
+        skills: '/api/skills',
+        chatbot: '/api/chatbot'
       }
     });
   });
