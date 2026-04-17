@@ -13,8 +13,8 @@ const projects = [
   },
   {
     title: 'Analyse de Sentiments NLP',
-    description: 'Application d\'analyse de sentiments en temps réel utilisant BERT et FastAPI. Classification des avis clients en 3 catégories avec une précision de 89%.',
-    tools: ['Python', 'Transformers', 'FastAPI', 'React'],
+    description: 'Application d\'analyse de sentiments en temps réel utilisant BERT. Classification des avis clients en 3 catégories avec une précision de 89%.',
+    tools: ['Python', 'Transformers', 'Pandas', 'NumPy'],
     github_url: 'https://github.com/Delamou1234/sentiment-analysis',
     demo_url: null,
     image_url: null,

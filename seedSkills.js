@@ -35,7 +35,6 @@ const skills = [
   // MLOps & Outils
   { name: 'Docker', category: 'MLOps & Outils', level: 80 },
   { name: 'MLflow', category: 'MLOps & Outils', level: 78 },
-  { name: 'FastAPI', category: 'MLOps & Outils', level: 83 },
   { name: 'Git / GitHub', category: 'MLOps & Outils', level: 90 },
 ];
 
